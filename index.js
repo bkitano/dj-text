@@ -15,7 +15,7 @@ var config = {
   database: process.env.PGDATABSE,
   password: process.env.PGPASSWORD,
   host: process.env.PGHOST,
-  port: 8080, //env var: PGPORT
+  port: 5432, //env var: PGPORT
   max: 2, // max number of clients in the pool
   idleTimeoutMillis: 30000, // how long a client is allowed to remain idle before being closed
 };
@@ -28,6 +28,7 @@ app.get('/', function (req, res) {
 
 
 //-----FOOTERS-------
+
 app.listen(8080, function () {
   console.log('Example app listening on port 8080!')
 })
