@@ -29,6 +29,6 @@ app.get('/', function (req, res) {
 
 //-----FOOTERS-------
 
-app.listen(8080, function () {
+app.listen(port, function () {
   console.log('Example app listening on port 8080!')
 })
