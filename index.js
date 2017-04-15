@@ -10,6 +10,7 @@ var express = require('express');
 var twilio = require("twilio");
 var exphbs  = require('express-handlebars');
 const bodyParser = require('body-parser');
+var http = require("http");
 
 
 // app.engine('handlebars', exphbs({defaultLayout: 'main'}));
@@ -34,14 +35,15 @@ app.get('/', function (req, res) {
   res.send('Hello World!')
 })
 
-app.post('/sms', function(req, res) {
-  var twilio = require('twilio');
+app.get('/sms', function(req, res) {
+  // var twilio = require('twilio');
   var twiml = new twilio.TwimlResponse();
-  twiml.message('The Robots are coming! Head for the hills!');
+  twiml.message('Quinn Lewis sucks');
   res.writeHead(200, {'Content-Type': 'text/xml'});
+  //res.render('sms');
   res.end(twiml.toString());
-  //res.render('sms.html');
-  console.log(req);
+  var message = req;
+  console.log(message.query.Body);
 });
 
 //-----FOOTERS-------
