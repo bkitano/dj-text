@@ -49,11 +49,11 @@ app.get('/sms', function(req, res) {
     now.setTimezone("UTC-8");
     var receive_time = now.toString();
     
-  var twiml = new twilio.TwimlResponse();
-  twiml.message('Quinn Lewis sucks');
-  res.writeHead(200, {'Content-Type': 'text/xml'});
-  //res.render('sms');
-  res.end(twiml.toString());
+//   var twiml = new twilio.TwimlResponse();
+//   twiml.message('Quinn Lewis sucks');
+//   res.writeHead(200, {'Content-Type': 'text/xml'});
+//   res.render('sms');
+//   res.end(twiml.toString());
   var message = req.query;
   
   // connecting to the databases
@@ -77,9 +77,30 @@ app.get('/sms', function(req, res) {
           })
       }
   })
-  
   // console.log(message);
 });
+
+app.get('/queue', function(req, res) {
+    // variables to send to handlebars doc
+    
+    
+    // connecting to the database
+    pool.connect(function(err, client, done) {
+        done(err);
+        if (err) {
+            throw err;
+        } else {
+            client.query('SELECT * FROM messages ORDER BY message_id DESC;', function(err, result) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    res.send(result.rows[0]);
+                }
+            }); // end of client.query
+        }
+    }); // end of pool.connect
+    
+}); // end of /queue
 
 //-----FOOTERS-------
 
